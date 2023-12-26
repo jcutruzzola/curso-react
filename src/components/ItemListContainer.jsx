@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Text, Flex, Center } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import ItemList from './ItemList'
 
 
@@ -54,6 +54,10 @@ const ItemListContainer = ({ greetings }) => {
   return (
 
     <div>
+
+       <Heading size='lg' fontSize='50px'>
+       {greetings}
+      </Heading>
 
       {
         categoryId ? <ItemList productos = {productosFiltrados}/> : <ItemList productos = {productos}/> 
