@@ -2,4 +2,5 @@
 
 Proyecto de E-Commerce
 
-[Recorrido Web Milano] (/src/assets/milano-recorrido.gif)
+![Recorrido Milano] (./src/assets/milano-recorrido.gif)
+
