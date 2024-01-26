@@ -16,17 +16,16 @@ const ItemList = ({ productos }) => {
         
           return (
 
-            
               <Item
                 key = {p.id}
+                id = {p.id}
                 nombre = {p.nombre}
                 descripcion = {p.descripcion}
                 precio = {p.precio}
-                id = {p.id}
+                img = {p.img}
             
             />
             
-        
             )
         
         })

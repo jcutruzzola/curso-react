@@ -1,23 +1,17 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Button } from '@chakra-ui/react'
+import { CartContext } from '../context/ShoppingCartContext'
 
-const ItemCount = () =>
-{
+const ItemCount = ( {producto} ) => {
+
+  const {cart, setCart, addToCart} = useContext(CartContext)
+
 
   const [contador, setContador] = useState(0)
   const mostrarMensaje = () => {
     alert (`Agregado al carrito ${contador} unidades`)
   
   }
-
-  useEffect(() =>
-  {
-    console.log("useEffect ejecutandose");
-
-
-  }, [contador])
-
 
   //   Ponerle validadores para que no supere x numeros y no sea menos de 0.
 
@@ -36,6 +30,9 @@ const ItemCount = () =>
     setContador(contador - 1)
 
   }
+   
+
+  // console.log(cart);
 
 
   return (
@@ -45,7 +42,7 @@ const ItemCount = () =>
         -
       </Button>
 
-      <Button onClick = {mostrarMensaje}>
+      <Button onClick = {()=> { addToCart (producto, contador)} }>
         Agregar al carrito {contador}
       </Button>
 
@@ -55,6 +52,8 @@ const ItemCount = () =>
 
     </div>
   )
+
 }
+
 
 export default ItemCount

@@ -1,56 +1,34 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail  from "./ItemDetail.jsx"
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 
 const ItemDetailContainer = () => {
 
   const { id } = useParams();
-  console.log(id);
 
-  const productos = [
-    {id: 1, nombre: "Producto A", descripcion: "Descripcion A", precio: 1500, categoria: "informal"},
-    {id: 2, nombre: "Producto B", descripcion: "Descripcion B", precio: 2000, categoria: "formal"},
-    {id: 3, nombre: "Producto C", descripcion: "Descripcion C", precio: 3500, categoria: "ninios"},
-    {id: 4, nombre: "Producto D", descripcion: "Descripcion D", precio: 3000, categoria: "formal"},
-    {id: 5, nombre: "Producto E", descripcion: "Descripcion E", precio: 4500, categoria: "deportivo"},
-    {id: 6, nombre: "Producto F", descripcion: "Descripcion F", precio: 5500, categoria: "formal"},
-    {id: 7, nombre: "Producto G", descripcion: "Descripcion G", precio: 4000, categoria: "informal"},
-    {id: 8, nombre: "Producto H", descripcion: "Descripcion H", precio: 3500, categoria: "ninios"},
-    {id: 9, nombre: "Producto I", descripcion: "Descripcion I", precio: 2500, categoria: "informal"},
-    {id: 10, nombre: "Producto J", descripcion: "Descripcion J", precio: 1500, categoria: "deportivo"}
-    ]
+  const [product, setProduct] = useState([])
+
+  useEffect(()=> {
   
-    const mostrarProductos = new Promise((resolve, reject) => {
+    const db = getFirestore()
     
-      if(productos.length > 0) {
-        setTimeout( () => {
-          resolve(productos)
-        }, 2000)
-      } else {
-        reject("No se obtuvieron productos")
-      
+    const item = doc(db, "Productos", `${id}`)
+
+    getDoc(item).then((snapshoot) => {
+      if(snapshoot.exists()){
+        const doc = snapshoot.data()
+        setProduct(doc)
       }
     })
-  
-    mostrarProductos
-    .then((resultado) => {
-      // console.log(resultado);
-    })
-    .catch((error) => {
-      console.log(error);
-    
-    })
-
-
-    const productoFiltrado = productos.find((producto) => producto.id == id)  
-
+  }, [])
 
   return (
     <div>
 
       <ItemDetail
-       producto = {productoFiltrado}     
+       producto = {product}     
        />
 
     </div>

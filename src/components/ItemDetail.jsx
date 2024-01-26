@@ -4,12 +4,13 @@ import ItemCount from './ItemCount.jsx'
 
 const ItemDetail = ( { producto } ) => {
 
+  
   return (
 
     <Card maxW='sm'>
       <CardBody>
         <Image
-          src=''
+          src={producto.img}
           alt=''
           borderRadius='lg'
         />
@@ -27,7 +28,7 @@ const ItemDetail = ( { producto } ) => {
       <CardFooter>
         <ButtonGroup spacing='2'>
 
-          <ItemCount/>
+          <ItemCount producto = { producto }/>
 
         </ButtonGroup>
       </CardFooter>
