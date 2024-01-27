@@ -10,6 +10,7 @@ const NavBar = () => {
                 <Box p='4' ml='10'>
 
                 <Link to ={"/"}>
+                    
                     <Text fontSize='2rem' className = 'textNavBar'>
 
                    Via Milano

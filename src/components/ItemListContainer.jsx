@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Heading } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
 import ItemList from './ItemList'
 import { collection, getFirestore, getDocs  } from 'firebase/firestore'
 
@@ -31,18 +31,41 @@ const ItemListContainer = ({ greetings }) => {
   const productosFiltrados = products.filter((producto) => producto.categoria == categoryId)
 
 
-
+    const categoryTexts = {
+      ninios: "Niños",
+      formal: "Formal",
+      informal: "Informal",
+      deportivo: "Deportivo"
+    
+    }
 
   return (
 
     <div>
-
-       <Heading size='lg' fontSize='50px'>
-       {greetings}
-      </Heading>
-
+     
       {
-        categoryId ? <ItemList productos = {productosFiltrados}/> : <ItemList productos = {products}/> 
+        categoryId ?
+         <>
+         <Box h='150px'justifyContent='center'  padding='2rem'> 
+          <Heading size='lg' fontSize='50px'textAlign='center' >
+          {categoryTexts[categoryId] || categoryId}
+
+         </Heading> 
+         </Box>
+         <ItemList productos = {productosFiltrados}/> 
+         
+         </> :
+         
+         <>
+           <Box h='150px'justifyContent='center'  padding='2rem'>
+              <Heading size='lg' fontSize='50px'textAlign='center' >
+             {greetings}
+             </Heading>
+          </Box>
+
+          <ItemList productos = {products}/> 
+
+         </>  
       }
 
  

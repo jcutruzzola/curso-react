@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import { Button } from '@chakra-ui/react'
+import { Button, Card, CardHeader, Heading, CardBody, Stack, Box, Text, StackDivider, Flex, Spacer, HStack, Container} from '@chakra-ui/react'
 import Form from './Form.jsx'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/ShoppingCartContext.jsx'
@@ -16,37 +16,73 @@ const Cart = () => {
 
   return (
     <div>
-      <Link to={"/cart"}>
+      <Link to={"/cart"}/>
 
       {
         cart.map((producto) => (
-          <div key={producto.id}>
-            <h2>{producto.nombre}</h2>
-            <p>Valor unidad $ {producto.precio}</p>
-            <p>Valor Total $ {producto.precio * producto.contador}</p>
-            <p>Cantidad: {producto.contador}</p>
 
-          </div>
-          
-          
+            <Container backgroundColor='whitesmoke' key={producto.id} maxW='100%'>
+              <Flex justify='center'>
+                <Card className = "cardCompra" border='1px' backgroundColor='whitesmoke' borderColor='black' margin='2rem' padding='1rem' width='40rem' borderRadius='2rem'>
+                  <CardHeader>
+                    <Heading size='lg'>Tu compra de {producto.nombre}</Heading>
+                  </CardHeader>
+
+                  <CardBody>
+                    <Stack divider={<StackDivider />} spacing='4'>
+                      <Box>
+                        <Heading size='xs' textTransform='uppercase'>
+                          {producto.nombre}
+                        </Heading>
+                        <Heading as='h6' size='xs'>
+                          Cantidad : {producto.contador}
+                        </Heading>
+                        <Text pt='2' fontSize='sm'>
+                          Valor Unidad: $ {producto.precio}
+                        </Text>
+                        <Heading as='h6' size='xs'>
+                          Valor Total: $ {producto.precio * producto.contador}
+                        </Heading>
+                      </Box>
+                      </Stack>
+                  </CardBody>
+                </Card>
+              </Flex>
+            </Container>
+        
         ))
       }
 
      {
      
      cart.length > 0 ?  
-     <> 
-      <h2> Precio Total: $ { finalValue() } </h2> 
+     <>
+     <Container maxW='100%' height= "500px" backgroundColor='whitesmoke'>
+      <Flex justify='center' >
+
+        <HStack spacing='35px'>
+          <Box border="1px" padding='1rem' borderRadius='10px'>
+            <Heading size='lg'> 
+            Precio Total: $ { finalValue() }
+            </Heading>
+          </Box>
+         
+        <Button onClick = {clearCart} colorScheme='teal' variant='outline'>
+          Vaciar Carrito
+        </Button>
+
+        </HStack>
+
+        </Flex>
 
       <Form/>
 
-      <Button onClick = {clearCart}>
-        Vaciar Carrito
-      </Button>
+      </Container>
 
       </> :
       <>
-        <h2> El carrito está vacío </h2>
+      
+        <Heading>El carrito está vacío</Heading>
 
         <Link to={'/'}>
         <Button>
@@ -57,12 +93,7 @@ const Cart = () => {
       </>
     } 
     
-
-    
-    
-      {/* <Form /> */}
-
-      </Link>
+      
       
       </div>
   )

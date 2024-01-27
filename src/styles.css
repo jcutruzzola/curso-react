@@ -5,5 +5,21 @@
 
 .boxNavBar {
 background-color: #171D23;
+}
+
+
+.form {
+    width: 500px;
+    border: solid, #B2A138;
+    margin: 2rem;
+    
+
+ 
+}
+
+.cardCompra {
+    border: solid, 2px, ;
+    width: 500px;
+
 
 }

@@ -1,8 +1,8 @@
 import {useState, useEffect, useContext} from 'react'
 import {collection, addDoc, getFirestore} from 'firebase/firestore'
-import { Input, Button, ButtonGroup, Text } from '@chakra-ui/react'
+import { Input, Button, ButtonGroup, Text, Card, CardBody, Box, StackDivider, Stack, Flex, Container } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
-import { CartContext } from '../context/ShoppingCartContext'
+import { CartContext } from '../context/ShoppingCartContext.jsx'
 
 
 const Form = () => {
@@ -42,7 +42,7 @@ const Form = () => {
                 <p style="margin-bottom: 10px;">Nos contactaremos a ${email}.</p>
                 <p>El id de tu compra es: ${id}.</p>
               `,
-              
+
                 icon: "success"
         
               });
@@ -70,24 +70,34 @@ const Form = () => {
   return (
 
     <div>
+      
+    <Flex direction="column"justify='center' alignItems='center'>
+      <Box className='form' border='1px' p='7' borderRadius='10px' backgroundColor='#171D23'> 
+
         <form action="" onSubmit={handleSubmit}>
-            <Input placeholder='Nombre' size='md' type='text' onChange={(e)=> setNombre(e.target.value)} value={nombre}/> 
-            <Input placeholder='Apellido' size='md' type='text' onChange={(e)=> setApellido(e.target.value)} value={apellido}/> 
-            <Input placeholder='E-mail' size='md' type="email" onChange={(e)=> setEmail(e.target.value)}value={email} />
+          <Stack>
+            <Input placeholder='Nombre' size='md' type='text' onChange={(e)=> setNombre(e.target.value)} value={nombre} backgroundColor='#171D23' color='whitesmoke'/> 
+            <Input placeholder='Apellido' size='md' type='text' onChange={(e)=> setApellido(e.target.value)} value={apellido} backgroundColor='#171D23' color='whitesmoke'/> 
+            <Input placeholder='E-mail' size='md' type="email" onChange={(e)=> setEmail(e.target.value)}value={email} backgroundColor='#171D23' color='whitesmoke'/>
 
+            <Flex justify='center'>
             <ButtonGroup>
-            <Button colorScheme='teal' variant='solid'  type="submit"> Finalizar Compra </Button>
-            {/* <Button colorScheme='teal' variant='outline' type="reset"> Reset </Button> */}
+            <Button colorScheme='teal' variant='solid'  type="submit" size='lg'> Finalizar Compra </Button>
             </ButtonGroup>
+            </Flex>
 
+          </Stack>
         </form>
 
-        <Text>
+      </Box>
 
+      <Box>
+      <Text fontSize='lg' as='b'>
             {`El id de su compra es: ${orderId}`}
-
         </Text>
-
+      </Box>
+    </Flex>
+  
 
     </div>
 
